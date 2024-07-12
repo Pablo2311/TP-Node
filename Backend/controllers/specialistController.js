@@ -1,7 +1,7 @@
 const db = require("../db/db.js");
 
 const getAllSpecs = (req, res)=>{
-    const sql = "SELECT * FROM Profesionales";
+    const sql = "SELECT * FROM Especialidades";
     db.query(sql, (error, results)=>{
         if (error){throw error};
         res.json(results);
@@ -10,7 +10,7 @@ const getAllSpecs = (req, res)=>{
 
 const getSpecById = (req, res)=>{
     const {id} = req.params;
-    const sql = 'SELECT * FROM Profesionales WHERE id = ?';
+    const sql = 'SELECT * FROM Especialidades WHERE IdEspecialidades = ?';
     db.query(sql, [id], (error, results)=>{
         if (error){throw error};
         res.json(results);
@@ -28,20 +28,20 @@ const createSpec = (req, res)=>{
 
 const updateSpec = (req, res)=>{
     const {id} = req.params;
-    const {nombre, apellido, DNI, matricula, Especialidades_IdEspecialidades} = req.body;
-    const sql = 'UPDATE Profesionales SET nombre = ?, apellido = ?, DNI = ?, matricula = ?, Especialidades_IdEspecialidades = ? WHERE id = ?';
-    db.query(sql, [nombre, apellido, DNI, matricula, Especialidades_IdEspecialidades, id], ()=>{
+    const {nombre} = req.body;
+    const sql = 'UPDATE Especialidades SET nombre = ? WHERE IdEspecialidades = ?';
+    db.query(sql, [nombre, id], (error, results)=>{
         if (error){throw error};
-        res.json({mensaje: "Doctor actualizada"});
+        res.json({mensaje: "Especialidad actualizada"});
     });
 };
 
 const deleteSpec = (req, res)=>{
     const {id} = req.params;
-    const sql = 'DELETE FROM Profesionales WHERE id = ?';
-    db.query(sql, [id], ()=>{
+    const sql = 'DELETE FROM Especialidades WHERE IdEspecialidades = ?';
+    db.query(sql, [id], (error, results)=>{
         if (error){throw error};
-        res.json({mensaje: "Doctor dado de baja"});
+        res.json({mensaje: "Especialidad dada de baja"});
     });
 };
 
