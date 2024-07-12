@@ -30,7 +30,7 @@ const updateDoc = (req, res)=>{
     const {id} = req.params;
     const {nombre, apellido, DNI, matricula, Especialidades_IdEspecialidades} = req.body;
     const sql = 'UPDATE Profesionales SET nombre = ?, apellido = ?, DNI = ?, matricula = ?, Especialidades_IdEspecialidades = ? WHERE IdDoctor = ?';
-    db.query(sql, [nombre, apellido, DNI, matricula, Especialidades_IdEspecialidades, id], ()=>{
+    db.query(sql, [nombre, apellido, DNI, matricula, Especialidades_IdEspecialidades, id], (error, results)=>{
         if (error){throw error};
         res.json({mensaje: "Doctor actualizada"});
     });
@@ -39,7 +39,7 @@ const updateDoc = (req, res)=>{
 const deleteDoc = (req, res)=>{
     const {id} = req.params;
     const sql = 'DELETE FROM Profesionales WHERE IdDoctor = ?';
-    db.query(sql, [id], ()=>{
+    db.query(sql, [id], (error, results)=>{
         if (error){throw error};
         res.json({mensaje: "Doctor dado de baja"});
     });

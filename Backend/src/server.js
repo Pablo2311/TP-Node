@@ -11,8 +11,8 @@ app.use(express.json());
 
 app.use("/profesionales", medicalRoutes);
 app.use("/especialidad", specialistRoutes);
-// app.use("/paciente", medicalRoutes);
-// app.use("/sucursales", medicalRoutes);
+app.use("/pacientes", medicalRoutes);
+app.use("/sucursales", medicalRoutes);
 
 app.listen(PORT, ()=>{
     console.log(`Servidor escuchando en puerto ${PORT}`);
